@@ -1,4 +1,0 @@
-drag
-menu
-slider
-hello
