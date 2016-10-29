@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../第一天/node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body ng-controller="myCtrl">
+<panel title="{{title}}" footer="footer" say="say(m)">{{content}}</panel>
+<script src="../../第一天/node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('myCtrl',function ($scope) {
+        $scope.title = '标题';
+        $scope.content = '内容';
+        $scope.footer = '尾部';
+        $scope.say = function (title) {
+            alert(title);
+        };
+        //将标题和尾部绑定到模板中，点击按钮 弹出对应的标题
+    });
+    app.directive('panel',function () {
+        return {
+            templateUrl:'panel.html',
+            transclude:true,
+            scope:{
+                title:'@title' ,//单项绑定
+                footer:'=footer', // footer="footer" 不加花括号{{}}
+                q:'&say'
+            }
+            //{}是无法继承其他作用域的  完全断绝关系   true不断绝关系
+            //如果插件内 写了一个值可能存在可能不存在 ，如果控制器中没有，则会报错
+            //我们希望每一个值都是传过来的
+        }
+    })
+</script>
+</body>
+</html>
