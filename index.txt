@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 drag
 menu
 slider
+=======
+>>>>>>> 6b036f70852c5bafe41f39ed7c16eaf8f0fd7377
 hello
