@@ -16,11 +16,14 @@ Girl.prototype.on = function(eventName, callBack) {
 
 /* 10.30作业 once实现 */
 Girl.prototype.once = function(eventName, callBack) {
+    var self = this;
     var onceCallBack = function tempCallBack() {
-        callBack();
+        var args = Array.prototype.slice.call(arguments);
+        callBack.call(self, args);
         this.removeListener(eventName, tempCallBack);
     }
     this.on(eventName, onceCallBack);
+    return this;
 };
 
 Girl.prototype.removeListener = function(eventName, callBack) {
@@ -33,8 +36,7 @@ Girl.prototype.removeListener = function(eventName, callBack) {
     return this;
 };
 Girl.prototype.emit = function(eventName) {
-    //除了赌徒宣布该的eventName,其他参数都是需要传进去的参数,获取参数列表(不包括第一个)
-
+    //除了第一项的eventName都是需要传进后执行的参数,获取参数列表（不包括第一个）
     //var args = Array.prototype.slice.call(arguments, 1);
     var args = Array.from(arguments).slice(1);
 
@@ -56,8 +58,9 @@ function buyPack(buyer, receiver) {
 function buyCar(buyer, receiver) {
     console.log(buyer + '买bmw' + receiver);
 }
-function eat() {
+function eat(a, b) {
     console.log("吃吃吃");
+    console.log(a, b);
 }
 
 // girl.on(EVENT_MONEY, buyPack);
@@ -68,5 +71,5 @@ function eat() {
 girl.once(EVENT_ANGRY, eat);
 
 //2次调用
-girl.emit(EVENT_ANGRY);
-girl.emit(EVENT_ANGRY);
+girl.emit(EVENT_ANGRY, 'aaa', 'bbb');
+girl.emit(EVENT_ANGRY, 'aaa', 'bbb');
