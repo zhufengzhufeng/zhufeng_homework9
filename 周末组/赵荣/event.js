@@ -61,6 +61,7 @@ function buyCar(buyer, receiver) {
 function eat(a, b) {
     console.log("吃吃吃");
     console.log(a, b);
+
 }
 
 // girl.on(EVENT_MONEY, buyPack);
